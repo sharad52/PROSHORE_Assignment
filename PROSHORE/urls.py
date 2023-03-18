@@ -15,9 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('contents.urls', namespace='content')),
     path('api/', include('contents.api.urls', namespace='api_content')),
 ]
+
+# Add flag for handling the 404 error
+handler404 = 'contents.views.error_404_view'
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
