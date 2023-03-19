@@ -8,7 +8,7 @@ class Content(models.Model):
     author_name = models.CharField(max_length=100)
     author_image_url = models.URLField()
     author_designation = models.CharField(max_length=100)
-    reading_time = models.TimeField()
+    reading_time = models.CharField(max_length=60)
 
     class Meta:
         db_table = 'content'
