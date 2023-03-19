@@ -5,4 +5,4 @@ from contents.models import Content
 class ContentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Content
-        field = '__all__'
+        fields = '__all__'

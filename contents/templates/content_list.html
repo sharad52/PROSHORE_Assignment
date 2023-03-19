@@ -1,1 +1,34 @@
-<h1> I'm list content</h1>
+
+{% extends 'base.html' %}
+{% block content %}
+
+<table class="table listing-table bordered mgt20">
+    <thead>
+        <tr>
+            <th>SN</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Blog Image Url</th>
+            <th>Author Name</th>
+            <th>Author Image Url</th>
+            <th>Author Designation</th>
+            <th>Reading Time</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for content in list_content %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{content.title}}</td>
+            <td>{{content.description}}</td>
+            <td>{{content.blog_image_url}}</td>
+            <td>{{content.author_name}}</td>
+            <td>{{content.author_image_url}}</td>
+            <td>{{content.author_designation}}</td>
+            <td>{{content.reading_time}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
