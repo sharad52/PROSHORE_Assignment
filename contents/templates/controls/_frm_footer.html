@@ -1,0 +1,17 @@
+<div class="form-group mgt20">
+    {% if scenario == 'Update' %}
+    <button class="btn btn-warning mr-1" id="frmUpdate" data-bind="click: update">
+        <i class="fas fa-pen mr-1"></i> Update
+    </button>
+    <button class="btn btn-danger" id='frmDel' data-bind="click: del">
+        <i class="fas fa-trash-alt mr-1"></i> Delete
+    </button>
+    {% endif %}
+
+    {% if scenario == 'Create' %}
+    <button class="btn btn-primary" id="frmSave" data-bind="click: save">
+        <i class="fas fa-save mr-1"></i> {{create_text|default:'Save'}}
+    </button>
+    {% endif %}
+
+</div>

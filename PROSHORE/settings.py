@@ -10,10 +10,18 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+import os
+
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+EXTRA_DIR = BASE_DIR/ 'extras'
+MEDIA_DIR = EXTRA_DIR/ 'media'
+STATIC_DIR = EXTRA_DIR/ 'static'
+
+TEMPLATE_DIR = BASE_DIR/ 'pages'
 
 
 # Quick-start development settings - unsuitable for production
@@ -25,7 +33,7 @@ SECRET_KEY = 'django-insecure--5$@)97tdpusfcbekil4%3_b%!)b1#jbdt*r$o*ag9vgf=%#@w
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -37,9 +45,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #DRF
+    'rest_framework',
 
     #Our Apps
     'contents.apps.ContentsConfig',
+
 ]
 
 MIDDLEWARE = [
@@ -57,7 +68,9 @@ ROOT_URLCONF = 'PROSHORE.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            TEMPLATE_DIR,
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -76,10 +89,22 @@ WSGI_APPLICATION = 'PROSHORE.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+#POSTGRESQL DB SETUP
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'proshore',
+        'USER': 'proshore',
+        'PASSWORD': 'proshore',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
@@ -115,10 +140,18 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.1/howto/static-files/
-
+# STATIC FILES SETTINGS
 STATIC_URL = 'static/'
+
+STATICFILES_DIRS = [
+    os.path.join("global_assets", "static")
+]
+
+STATIC_ROOT = STATIC_DIR
+
+#MEDIA FILES SETTINGS
+MEDIA_URL = '/media/'
+MEDIA_ROOT = MEDIA_DIR
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

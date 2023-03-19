@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="row">
+    <form action="" class="col-md-4" method="post" id="frm">
+        {% csrf_token %}
+        <div class="form-group">
+            <label>Title</label>
+            <input type="text" name="title" class="form-control" data-bind="value: title"/>
+        </div>
+
+        <div class="form-group">
+            <label for="">Description</label>
+            <textarea name="description" rows="4" cols="35" data-bind="value: description"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Blog Image Url</label>
+            <input type="url" name="blog_image_url" class="form-control" data-bind="value: blog_image_url"/>
+        </div>
+
+        <div class="form-group">
+            <label>Author</label>
+            <input type="text" name="author" class="form-control" data-bind="value: author_name"/>
+        </div>
+
+        <div class="form-group">
+            <label>Author Image Url</label>
+            <input type="url" name="author_image_url" class="form-control" data-bind="value: author_image_url"/>
+        </div>
+
+        <div class="form-group">
+            <label>Author Designation</label>
+            <input type="text" name="designation" class="form-control" data-bind="value: author_designation"/>
+        </div>
+
+        <div class="form-group">
+            <label>Reading Time</label>
+            <input type="time" name="author_image_url" class="form-control" data-bind="value: reading_time"/>
+        </div>
+
+        {% include 'controls/_frm_footer.html' %}
+    </form>
+</div>
+{% endblock %}
+
+{% block extra_head %}
+<script>
+    var scenario = {{ scenario}};
+    var init_data = {{ init_data}};
+    console.log(init_data);
+</script>
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'js/content_api.js' %}" type="text/javascript"></script>
+<script type="text/javascript" src="{% static 'js/knockout-3.5.1.js'%}"></script>
+<script src="{% static 'js/knockout.validation.min.js' %}"></script>
+<script src="{% static 'js/content.js' %}"></script>
+
+{% endblock script %}
