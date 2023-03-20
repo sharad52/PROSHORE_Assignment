@@ -35,6 +35,5 @@ def extractData(tableName):
 
         dbc.insertData(job, tableName)
         
-for i in range(0, 5000):
-    print('success')
-    extractData('public.content')
+
+extractData('public.content')

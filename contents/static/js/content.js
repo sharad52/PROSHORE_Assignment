@@ -2,14 +2,22 @@ $(document).ready(function() {
     var vm = new ContentViewModel(init_data);
     ko.applyBindings(vm);
 
-    $('#frm').validate({
-        rules: {
-
-        },
-        messages: {
-
-        },
-    })
+    // $('#frm').validate({
+    //     rules: {
+    //         title: {required: true },
+    //         description: {required: true},
+    //         author_name: {required: true},
+    //         author_designation: {required: true},
+    //         reading_time: {required: true},
+    //     },
+    //     messages: {
+    //         title: {required: 'Title is Required.' },
+    //         description: {required: 'Description is required.'},
+    //         author_name: {required: 'Author name is required.'},
+    //         author_designation: {required: 'Author designation is required.'},
+    //         reading_time: {required: 'Reading time is required.'},
+    //     },
+    // })
 });
 
 function ContentViewModel(model) {
@@ -23,21 +31,21 @@ function ContentViewModel(model) {
 
 
     this.save = function() {
-        var validationResult = $('#frm').valid();
+        var validationResult = true;
         if (validationResult) {
             let postJson = ko.toJSON(this);
             contentApi
                 .save(postJson)
                 .then(res => {
                     bs_alert.success('Content Saved Successfully.');
-                    redirectAfterAlert('')
+                    redirectAfterAlert('/')
                 })
                 .catch(err => bs_alert.all_errors(err));
         }
     }
 
     this.update = function() {
-        var validationResult = $('frm').valid();
+        var validationResult = true;
         if (validationResult) {
             var postJson = ko.toJSON(this);
             contentApi
@@ -72,6 +80,6 @@ function ContentViewModel(model) {
     }
 
     if (scenario == 'Update') {
-        self.populate(model)
+        this.populate(model)
     }
 }

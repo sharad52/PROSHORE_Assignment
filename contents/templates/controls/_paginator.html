@@ -1,0 +1,85 @@
+{% load utils_tags %}
+
+{% if lst_page.paginator.num_pages > 1%}
+<div class="d-flex justify-content-between">
+    <ul class="pagination">
+        {% if lst_page.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="?{% query_transform request page=lst_page.previous_page_number %}">Prev</a>
+        </li>
+        {% endif %}
+
+        {% if lst_page.paginator.num_pages <= 7 %}
+            {% for page in lst_page.paginator.page_range %}
+                <li class="page-item {% if lst_page.number == page  %}active{% endif %}">
+                    <a class="page-link" href="?{% query_transform request page=page %}">{{ page }}</a>
+                </li>
+            {% endfor %}
+        {% else %}
+            {% for page in lst_page.paginator.page_range %}
+
+                {% if lst_page.number > 4 and page == 1 %}
+                    <li class="page-item {% if lst_page.number == page  %}active{% endif %}">
+                        <a class="page-link" href="?{% query_transform request page=page %}">{{ page }}</a>
+                    </li>
+                    <li>
+                        <a class="page-link" href="#">....</a>
+                    </li>
+                {% elif page >= lst_page.number|add:"-3" and page <= lst_page.number|add:"3" %}
+                     <li class="page-item {% if lst_page.number == page  %}active{% endif %}">
+                        <a class="page-link" href="?{% query_transform request page=page %}">{{ page }}</a>
+                    </li>
+                {% elif lst_page.number < lst_page.paginator.num_pages|add:"-3" and page == lst_page.paginator.num_pages %}
+                    <li>
+                        <a class="page-link" href="#">....</a>
+                    </li>
+                    <li class="page-item {% if lst_page.number == page  %}active{% endif %}">
+                        <a class="page-link" href="?{% query_transform request page=page %}">{{ page }}</a>
+                    </li>
+                {% endif %}
+
+            {% endfor %}
+        {% endif %}
+
+        {% if lst_page.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?{% query_transform request page=lst_page.next_page_number %}">Next</a>
+        </li>
+        {% endif %}
+    </ul>
+
+    <div>
+        <form method="GET" action="{{ request.get_full_path }}">
+            <div class="form-group d-flex align-items-center">
+                {% for k, v in request.GET.items %}
+                    {% if k != 'page' and k != 'page_capacity' %}
+                    <input type="text" name="{{k}}" value="{{v}}" hidden />
+                    {% endif %}
+                {% endfor %}
+
+                <div class="d-flex align-items-center mr-3">
+                    <label class="mr-2">Capacity</label>
+                    <select name="page_capacity" class="form-control">
+                        {% create_list '25' '50' '75' '100' as page_options %}
+                        {% for each in page_options %}
+                            {% if request.GET.page_capacity == each %}
+                                <option value={{each}} selected>{{each}} per page</option>
+                            {% else %}
+                                <option value={{each}}>{{each}} per page</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="d-flex align-items-center">
+                    <label class="mr-2">Goto</label>
+                    <input type="number" name="page" value="{{request.GET.page}}" class="form-control mr-2" style="width: 70px;"/>
+                </div>
+
+                <button class="btn btn-info" type="submit">GO</button>
+            </div>
+        </form>
+    </div>
+
+</div>
+{% endif %}
