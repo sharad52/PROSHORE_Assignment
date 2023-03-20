@@ -1,11 +1,15 @@
 
 {% extends 'base.html' %}
+
+{% load static %}
+{% load utils_tags %}
+
 {% block content %}
 
 <table class="table listing-table bordered mgt20">
     <thead>
         <tr>
-            <th>SN</th>
+            <th class="text-center" width="1%">SN</th>
             <th>Title</th>
             <th>Description</th>
             <th>Blog Image Url</th>
@@ -16,19 +20,23 @@
         </tr>
     </thead>
     <tbody>
-        {% for content in list_content %}
+        {% for content in lst_content %}
         <tr>
-            <td>{{forloop.counter}}</td>
-            <td>{{content.title}}</td>
+            <td>{{content.id}}</td>
+            <td>
+                <a href="{% url 'content:view_content' content.id %}" target="_blank">{{content.title}}</a>    
+            </td>
             <td>{{content.description}}</td>
-            <td>{{content.blog_image_url}}</td>
+            <td>{{content.blog_image_url|truncatechars:15}}</td>
             <td>{{content.author_name}}</td>
-            <td>{{content.author_image_url}}</td>
+            <td>{{content.author_image_url|truncatechars:15}}</td>
             <td>{{content.author_designation}}</td>
             <td>{{content.reading_time}}</td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
+
+{% include 'controls/_paginator.html' with lst_page=lst_content %}
 
 {% endblock %}

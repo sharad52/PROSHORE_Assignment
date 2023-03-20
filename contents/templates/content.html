@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load filters %}
 {% block content %}
 <div class="row">
     <form action="" class="col-md-4" method="post" id="frm">
@@ -11,7 +12,7 @@
 
         <div class="form-group">
             <label for="">Description</label>
-            <textarea name="description" rows="4" cols="35" data-bind="value: description"></textarea>
+            <textarea class="form-control" name="description" rows="4" cols="35" data-bind="value: description"></textarea>
         </div>
 
         <div class="form-group">
@@ -36,7 +37,7 @@
 
         <div class="form-group">
             <label>Reading Time</label>
-            <input type="time" name="author_image_url" class="form-control" data-bind="value: reading_time"/>
+            <input type="input" name="author_image_url" class="form-control" data-bind="value: reading_time"/>
         </div>
 
         {% include 'controls/_frm_footer.html' %}
@@ -46,9 +47,10 @@
 
 {% block extra_head %}
 <script>
-    var scenario = {{ scenario}};
-    var init_data = {{ init_data}};
+    var scenario = {{ scenario|jsonify}};
+    var init_data = {{ init_data|jsonify}};
     console.log(init_data);
+    console.log(scenario)
 </script>
 {% endblock %}
 
