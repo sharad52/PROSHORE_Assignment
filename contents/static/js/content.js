@@ -2,22 +2,22 @@ $(document).ready(function() {
     var vm = new ContentViewModel(init_data);
     ko.applyBindings(vm);
 
-    // $('#frm').validate({
-    //     rules: {
-    //         title: {required: true },
-    //         description: {required: true},
-    //         author_name: {required: true},
-    //         author_designation: {required: true},
-    //         reading_time: {required: true},
-    //     },
-    //     messages: {
-    //         title: {required: 'Title is Required.' },
-    //         description: {required: 'Description is required.'},
-    //         author_name: {required: 'Author name is required.'},
-    //         author_designation: {required: 'Author designation is required.'},
-    //         reading_time: {required: 'Reading time is required.'},
-    //     },
-    // })
+    $('#frm').validate({
+        rules: {
+            title: {required: true },
+            description: {required: true},
+            author_name: {required: true},
+            author_designation: {required: true},
+            reading_time: {required: true},
+        },
+        messages: {
+            title: {required: 'Title is Required.' },
+            description: {required: 'Description is required.'},
+            author_name: {required: 'Author name is required.'},
+            author_designation: {required: 'Author designation is required.'},
+            reading_time: {required: 'Reading time is required.'},
+        },
+    })
 });
 
 function ContentViewModel(model) {
