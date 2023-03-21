@@ -5,6 +5,28 @@
 {% load utils_tags %}
 
 {% block content %}
+<!-- search form -->
+{% with method=method|default:"GET" %}
+<form class="row mgt20" method="{{method}}">
+    {% if method != 'GET' %}
+        {% csrf_token %}
+    {% endif %}
+
+    <div class="form-group col-md-3">
+        <label>Title</label>
+        {{frm.title}}
+    </div>
+
+    <div class="form-group col-md-3">
+        <label>Author</label>
+        {{frm.author_name}}
+    </div>
+
+    <div class="col-md-12">
+        <button class="btn btn-primary" type="submit" name="go">See Results</button>
+    </div>
+</form>
+{% endwith %}
 
 <table class="table listing-table bordered mgt20">
     <thead>
