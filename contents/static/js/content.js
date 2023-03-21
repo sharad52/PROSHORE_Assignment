@@ -37,6 +37,7 @@ function ContentViewModel(model) {
             contentApi
                 .save(postJson)
                 .then(res => {
+                    alert('Content Saved successfully.')
                     bs_alert.success('Content Saved Successfully.');
                     redirectAfterAlert('/')
                 })
@@ -51,6 +52,7 @@ function ContentViewModel(model) {
             contentApi
                 .update(model.id, postJson)
                 .then(res => {
+                    alert('Updated successfully.');
                     bs_alert.success('Content updated successfully');
                     redirectAfterAlert('/content/' + model.id);
                 })
@@ -62,6 +64,7 @@ function ContentViewModel(model) {
         contentApi
             .del(model.id)
             .then(res => {
+                alert('Content Deleted Successfully.');
                 bs_alert.success('Content Deleted Successfully.');
                 redirectAfterAlert('/')
             })
