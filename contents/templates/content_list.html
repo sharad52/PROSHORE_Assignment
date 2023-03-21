@@ -4,6 +4,8 @@
 {% load static %}
 {% load utils_tags %}
 
+{% block title %} List Blog {% endblock %}
+
 {% block content %}
 <!-- search form -->
 {% with method=method|default:"GET" %}
@@ -39,6 +41,7 @@
             <th>Author Image Url</th>
             <th>Author Designation</th>
             <th>Reading Time</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -54,6 +57,9 @@
             <td>{{content.author_image_url|truncatechars:15}}</td>
             <td>{{content.author_designation}}</td>
             <td>{{content.reading_time}}</td>
+            <td>
+                <a style="font-size: 18px; text-decoration:none;" href="{% url 'content:view_content' content.id %}" data>Edit</a>
+            </td>
         </tr>
         {% endfor %}
     </tbody>
