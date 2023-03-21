@@ -1,7 +1,7 @@
 function ContentApi() {
     var base_url = '/api/content/';
     var specific_url = id => {
-        return base_url = id = '/';
+        return base_url + id + '/';
     };
 
     this.list = () => {

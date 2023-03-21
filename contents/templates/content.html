@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load filters %}
+
+
 {% block content %}
 <div class="row">
     <form action="" class="col-md-4" method="post" id="frm">
@@ -51,6 +53,7 @@
     var init_data = {{ init_data|jsonify}};
     console.log(init_data);
     console.log(scenario)
+    const csrf_token = '{{ csrf_token }}';
 </script>
 {% endblock %}
 
