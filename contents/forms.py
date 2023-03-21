@@ -14,3 +14,9 @@ class ContentForm(forms.Form):
         max_length=100
         )
     
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request', None)
+        super(ContentForm, self).__init__(*args, **kwargs)
+        self.fields['title'].widget.attrs['class'] = 'form-control'
+        self.fields['author_name'].widget.attrs['class'] = 'form-control'
+    
