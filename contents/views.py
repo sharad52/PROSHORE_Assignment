@@ -19,7 +19,7 @@ class ContentListView(DFView, GlobalPaginatorMixin):
     form_class = ContentForm
 
     def get_queryset(self):
-        qset = self.model.objects.all().order_by('id')
+        qset = self.model.objects.all()
         return qset
     
     def get_form(self):
